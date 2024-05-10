@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: SpringBootKeycloak
+  profiles:
+    active: local
+---
+
+server:
+  port: 8084
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/spring-boot-realm-dev
+          jwk-set-uri: http://localhost:8080/realms/spring-boot-realm-dev/protocol/openid-connect/certs
+
+jwt:
+  auth:
+    converter:
+      resource-id: spring-client-api-test
+      principle-attribute: preferred_username
+
+logging:
+  level:
+    org:
+      keycloak: DEBUG
