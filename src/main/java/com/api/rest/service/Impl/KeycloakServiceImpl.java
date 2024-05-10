@@ -21,19 +21,19 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class KeycloakServiceImpl implements IKeycloakService {
 
-  public List<UserRepresentation> findAllUsers() {
+  public List<UserRepresentation> findAll() {
     return KeycloakProvider.getRealmResource()
         .users()
         .list();
   }
 
-  public List<UserRepresentation> searchUserByUsername(String username) {
+  public List<UserRepresentation> getByUsername(String username) {
     return KeycloakProvider.getRealmResource()
         .users()
         .searchByUsername(username, true);
   }
 
-  public String createUser(@NonNull UserDto UserDto) {
+  public String create(@NonNull UserDto UserDto) {
 
     int status = 0;
     UsersResource usersResource = KeycloakProvider.getUserResource();
@@ -90,13 +90,13 @@ public class KeycloakServiceImpl implements IKeycloakService {
     }
   }
 
-  public void deleteUser(String userId) {
+  public void deleteById(String userId) {
     KeycloakProvider.getUserResource()
         .get(userId)
         .remove();
   }
 
-  public void updateUser(String userId, @NonNull UserDto UserDto) {
+  public void update(String userId, @NonNull UserDto UserDto) {
 
     CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
     credentialRepresentation.setTemporary(false);

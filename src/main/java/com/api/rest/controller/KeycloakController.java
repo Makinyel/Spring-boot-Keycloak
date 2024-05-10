@@ -12,42 +12,42 @@ import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("/keycloak/user")
-@PreAuthorize("hasRole('admin_client_role')")
+@PreAuthorize("hasRole('admin-client')")
 public class KeycloakController {
 
   @Autowired
   private IKeycloakService keycloakService;
 
 
-  @GetMapping("/search")
+  @GetMapping("/getAll")
   public ResponseEntity<?> findAllUsers(){
-    return ResponseEntity.ok(keycloakService.findAllUsers());
+    return ResponseEntity.ok(keycloakService.findAll());
   }
 
 
-  @GetMapping("/search/{username}")
+  @GetMapping("/getByName/{username}")
   public ResponseEntity<?> searchUserByUsername(@PathVariable String username){
-    return ResponseEntity.ok(keycloakService.searchUserByUsername(username));
+    return ResponseEntity.ok(keycloakService.getByUsername(username));
   }
 
 
   @PostMapping("/create")
   public ResponseEntity<?> createUser(@RequestBody UserDto userDto) throws URISyntaxException {
-    String response = keycloakService.createUser(userDto);
+    String response = keycloakService.create(userDto);
     return ResponseEntity.created(new URI("/keycloak/user/create")).body(response);
   }
 
 
   @PutMapping("/update/{userId}")
   public ResponseEntity<?> updateUser(@PathVariable String userId, @RequestBody UserDto userDto){
-    keycloakService.updateUser(userId, userDto);
+    keycloakService.update(userId, userDto);
     return ResponseEntity.ok("User updated successfully");
   }
 
 
   @DeleteMapping("/delete/{userId}")
   public ResponseEntity<?> deleteUser(@PathVariable String userId){
-    keycloakService.deleteUser(userId);
+    keycloakService.deleteById(userId);
     return ResponseEntity.noContent().build();
   }
 }

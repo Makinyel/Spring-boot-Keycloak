@@ -6,13 +6,13 @@ import org.keycloak.representations.idm.UserRepresentation;
 
 public interface IKeycloakService {
 
-  List<UserRepresentation> findAllUsers();
+  List<UserRepresentation> findAll();
 
-  List<UserRepresentation> searchUserByUsername(String username);
+  List<UserRepresentation> getByUsername(String username);
 
-  String createUser(UserDto userDTO);
+  String create(UserDto userDTO);
 
-  void deleteUser(String userId);
+  void deleteById(String userId);
 
-  void updateUser(String userId, UserDto userDTO);
+  void update(String userId, UserDto userDTO);
 }

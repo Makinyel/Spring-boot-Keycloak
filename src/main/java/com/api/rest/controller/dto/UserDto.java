@@ -11,10 +11,10 @@ import lombok.Value;
 @Builder
 public class UserDto implements Serializable {
 
-  private String username;
+  private String username; // aespinosag - email
   private String email;
   private String firstName;
   private String lastName;
-  private String password;
+  private String password; // A_ES_GU_2024(año actual)_*
   private Set<String> roles;
 }

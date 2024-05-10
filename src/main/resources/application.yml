@@ -6,20 +6,20 @@ spring:
 ---
 
 server:
-  port: 8084
+  port: 8085
 
 spring:
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/spring-boot-realm-dev
-          jwk-set-uri: http://localhost:8080/realms/spring-boot-realm-dev/protocol/openid-connect/certs
+          issuer-uri: http://192.168.3.2:7029/auth/realms/colombo
+          jwk-set-uri: http://192.168.3.2:7029/auth/realms/colombo/protocol/openid-connect/certs
 
 jwt:
   auth:
     converter:
-      resource-id: spring-client-api-test
+      resource-id: spring-client-api
       principle-attribute: preferred_username
 
 logging:
